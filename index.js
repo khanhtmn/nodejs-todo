@@ -1,12 +1,12 @@
 //dependencies required for the app
-var express = require("express");
+var express = require("express"); // require just the installed express app
 var bodyParser = require("body-parser");
-var app = express();
+var app = express(); // then we call express 
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
-//render css files
-app.use(express.static("public"));
+// ???????????
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.set("view engine", "ejs"); // set up the template engine
+app.use(express.static("public")); //render css files
 
 //placeholders for added task
 var task = ["buy socks", "practise with nodejs"];
@@ -15,10 +15,12 @@ var complete = ["finish jquery"];
 
 //post route for adding new task 
 app.post("/addtask", function(req, res) {
-    var newTask = req.body.newtask;
+    // ????attribute of the req object????
+    var newTask = req.body.newtask; 
     //add the new task from the post route
     task.push(newTask);
-    res.redirect("/");
+    // after adding to the array, go back to the root route
+    res.redirect("/"); 
 });
 
 app.post("/removetask", function(req, res) {
@@ -37,6 +39,8 @@ app.post("/removetask", function(req, res) {
     res.redirect("/");
 });
 
+// ????What's this for????
+// send the equivalent HTML to the client
 //render the ejs and display added task, completed task
 app.get("/", function(req, res) {
     res.render("index", { task: task, complete: complete });
